@@ -301,6 +301,42 @@ namespace Leetcode_C_
 
         }
 
+        public static bool LemonadeChange(int[] bills)
+        {
+            int change = 0;
+            int bigChange = 0;
+            bool result = true; 
+
+            foreach (int b in bills) 
+            {
+                if (b == 5) change++;
+                if (b == 10) 
+                {
+                    bigChange++;
+                    change--;
+                }
+
+                if (b == 20) 
+                {
+                    if (bigChange > 0)
+                    {
+                        bigChange--;
+                        change--;
+                    }
+                    else 
+                    {
+                        change -= 3;
+                    }
+                }
+
+                if (bigChange < 0 || change < 0) 
+                    result = false;
+
+            }
+
+            return result;
+        }
+
     }
 }
 
