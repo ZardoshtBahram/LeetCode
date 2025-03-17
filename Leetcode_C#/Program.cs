@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 
@@ -9,16 +10,48 @@ namespace Leetcode_C_
         static void Main(string[] args)
         {
             Stopwatch stopwatch = new Stopwatch();
+            Program program = new Program();
+            int[] ranks = { 3, 2, 3, 2, 2, 2 , 7 , 1 , 1 , 7 };
             stopwatch.Start();
-            int[] array2 = { 12, 45, 78, 34, 56, 89 };
 
-            int[] candidates = { 16, 17, 71, 62, 12, 24, 14 };
-            Console.WriteLine(LargestCombination(candidates));
             
+            Console.WriteLine(program.DivideArray(ranks));
+
             stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            Console.WriteLine("\nTime is: " + stopwatch.ElapsedMilliseconds);
         }
-  
+
+
+        // 2594 Minimum Time to Repair cars
+        public bool DivideArray(int[] nums)
+        {
+            List<int> result = new List<int>();
+            foreach (int num in nums) 
+            {
+                result.Add(num);
+            }
+
+            while (result.Count > 0) 
+            {
+                int test = result.Count;
+                for (int i = 1; i < result.Count; i++) 
+                {
+                    if (result[0] == result[i])
+                    {
+                        result.RemoveAt(i);
+                        result.RemoveAt(0);
+                        break;
+                    }
+                }
+                if (test == result.Count)
+                    return false;
+
+            }
+
+            return true;
+        }
+
+   
         // 2938 Oct 15, 2024
         public static long MinimumSteps(string s)
         {
